@@ -1,5 +1,6 @@
 <div class="product-card product-card--list">
-  <a class="full-width-link" href="{{ product.url | within: collection }}">
+  <a class="full-width-link" 
+    href="{% if variant_id %}{{ product.url | within: collection }}?variant={{ variant_id }}{% else %}{{ product.url | within: collection }}{% endif %}">
     <span class="visually-hidden">{{ product.title }}</span>
   </a>
 
@@ -12,7 +13,7 @@
 
     <div class="list-view-item__title-column">
       <div class="list-view-item__title" aria-hidden="true">
-        <span class="product-card__title">{{ product.title }}</span>
+        <span class="product-card__title">{{ product.title }}{% if variant_name %} - {{ variant_name }}{% endif %}</span>
       </div>
       {% if product.compare_at_price > product.price %}
         <div class="list-view-item__on-sale">{{ 'products.product.on_sale' | t }}</div>
