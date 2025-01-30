@@ -156,6 +156,7 @@
       <ul class="grid grid--uniform{% if collection.products_count > 0 %} grid--view-items{% endif %}">
         {% for product in collection.products %}
           {% assign color_options = '' %}
+          {% assign color_image = '' %}
           {% for variant in product.variants %}
             {% if variant.option2 %} 
               {% assign color_options = color_options | append: ',' | append: variant.option2 %}
@@ -170,12 +171,13 @@
             {% for variant in product.variants %}
               {% if variant.option2 == color %}
                 {% assign color_id = variant.id %}
+                {% assign color_image = variant.image %}
                 {% break %}
               {% endif %}
             {% endfor %}
 
             <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
-              {% include 'product-card-grid', max_height: max_height, variant_id: color_id, variant_name: color %}
+              {% include 'product-card-grid', max_height: max_height, variant_id: color_id, variant_name: color, variant_image: color_image %}
               </li>
               
           {% endfor %}
@@ -216,6 +218,7 @@
       <ul class="list-view-items">
         {% for product in collection.products %}
           {% assign color_options = '' %}
+          {% assign color_image = '' %}
           {% for variant in product.variants %}
             {% if variant.option2 %} 
               {% assign color_options = color_options | append: ',' | append: variant.option2 %}
@@ -230,12 +233,13 @@
             {% for variant in product.variants %}
               {% if variant.option2 == color %}
                 {% assign color_id = variant.id %}
+                {% assign color_image = variant.image %}
                 {% break %}
               {% endif %}
             {% endfor %}
 
             <li class="list-view-item">
-              {% include 'product-card-list', product: product, variant_id: color_id, variant_name: color %}
+              {% include 'product-card-list', product: product, variant_id: color_id, variant_name: color, variant_image: color_image %}
             </li>
               
           {% endfor %}
